@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "@fontsource-variable/zalando-sans";
+@import "@fontsource-variable/onest";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-text: rgb(var(--text));
+  --color-background: rgb(var(--background));
+  --color-primary: rgb(var(--primary));
+  --color-secondary: rgb(var(--secondary));
+  --color-accent: rgb(var(--accent));
+}
+
+@layer base {
+  :root {
+    --text: 20, 15, 18;
+    --background: 252, 248, 250;
+    --primary: 83, 65, 74;
+    --secondary: 182, 169, 160;
+    --accent: 201, 176, 131;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: 220, 214, 217;
+      --background: 7, 3, 5;
+      --primary: 190, 172, 181;
+      --secondary: 95, 82, 73;
+      --accent: 124, 100, 54;
+
+      &:not([data-theme="light"]) .mermaid {
+        filter: invert(0.88);
+      }
+    }
+  }
+}
+
+[data-theme="dark"] .mermaid {
+  filter: invert(0.88);
+}
