@@ -6,6 +6,7 @@ import { defineConfig } from "astro/config";
 import mermaid from "astro-mermaid";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeFigureTitle from "rehype-figure-title";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
@@ -21,6 +22,6 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [rehypeKatex, rehypeFigureTitle],
   },
 });
