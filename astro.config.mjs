@@ -7,6 +7,7 @@ import mermaid from "astro-mermaid";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeFigureTitle from "rehype-figure-title";
+import rehypeExternalLinks from "rehype-external-links";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
@@ -22,6 +23,17 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypeFigureTitle],
+    rehypePlugins: [
+      rehypeKatex,
+      rehypeFigureTitle,
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+          rel: [],
+          content: { type: "text", value: "🡵" },
+        },
+      ],
+    ],
   },
 });
