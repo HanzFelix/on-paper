@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import FallbackImage from "../assets/blog-image-placeholder.webp";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+const posts = (
+  await getCollection("blog", ({ data }: CollectionEntry<"blog">) => {
+    return !data.archive;
+  })
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="px-4 mt-8">
+      <section class="mx-auto max-w-2xl">
+        <h1 class="text-2xl mb-4">All on paper</h1>
+        <ul class="md:grid grid-cols-2 gap-x-6">
+          {
+            posts.map((post) => (
+              <li class="first:col-span-2 mb-8">
+                <a
+                  href={`${import.meta.env.BASE_URL}/keen-on/${post.id}/`}
+                  class="hover:text-primary group"
+                >
+                  {
+                    <Image
+                      width={960}
+                      height={320}
+                      src={post.data.heroImage ?? FallbackImage}
+                      alt=""
+                      class="aspect-3/1 object-cover rounded-lg group-hover:opacity-80 transition-opacity"
+                    />
+                  }
+                  <div>
+                    <h2 class="text-lg">{post.data.title}</h2>
+                    <p class="text-sm text-primary">
+                      <FormattedDate date={post.data.pubDate} />
+                    </p>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
