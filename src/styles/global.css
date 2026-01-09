@@ -9,15 +9,21 @@
   --color-primary: rgb(var(--primary));
   --color-secondary: rgb(var(--secondary));
   --color-accent: rgb(var(--accent));
+
+  --font-heading: var(--heading);
+  --font-body: var(--body);
 }
 
 @layer base {
   :root {
+    --heading: "Onest Variable", sans-serif;
+    --body: "Zalando Sans Variable", sans-serif;
+
     --text: 20, 15, 18;
     --background: 252, 248, 250;
     --primary: 83, 65, 74;
     --secondary: 182, 169, 160;
-    --accent: 201, 176, 131;
+    --accent: 181, 156, 111;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -36,4 +42,27 @@
 
 [data-theme="dark"] .mermaid {
   filter: invert(0.88);
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(
+      rgba(var(--secondary), 50%),
+      var(--color-background)
+    )
+    no-repeat;
+  background-size: 100% 200px;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  scrollbar-color: var(--color-secondary) transparent;
+  scrollbar-gutter: stable;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
 }
