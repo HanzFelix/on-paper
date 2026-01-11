@@ -23,6 +23,21 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
       description={description}
       image={heroImage}
     />
+    <meta name="author" content="Hanz Felix" />
+    <meta property="og:type" content="article" />
+    <meta property="article:author" content="Hanz Felix" />
+    <meta
+      property="article:published_time"
+      content={new Date(pubDate).toISOString()}
+    />
+    {
+      updatedDate && (
+        <meta
+          property="article:modified_time"
+          content={new Date(updatedDate).toISOString()}
+        />
+      )
+    }
   </head>
 
   <body>
